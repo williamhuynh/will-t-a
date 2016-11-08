@@ -1,0 +1,73 @@
+Notes
+
+Problem: People know where they want to go, but do not have the time or know how to do it.
+    potential solution: users input where they want to go, and the app will automatically place it on a map with estimated times and cost in a recommended order
+
+Model Design
+
+User - has one profile, has many itineraries through UserItinerary, belongs to UserItinerary
+    email  
+    password
+Profile - belongs to user
+    first name
+    last name
+    address
+    photo
+Itinerary - belongs to UserItinerary, has many users through UserItinerary, has many itineraries
+    name
+    description
+    photo
+    cost
+    time
+    
+UserItinerary - has many Users, has many Itineraries
+
+Place - has many itineraries
+    name
+    description
+    duration
+    reviews
+    cost
+    latitude
+    longitude
+    
+
+Actors
+    User (non-admin - guest)
+        I want to be able to search locations so that it will recommend where I want to go
+        I want something to suggest to me what I can do at those locations so I can easily fulfill my itinerary
+        I want to see where other people went for inspiration
+        I want to see photos of locations so it can give me a better idea if I want to go or not
+        I want to see reviews of places and locations
+        
+    User (non-admin logged in) (in addition to a bove)
+        I want to be able to save my itinerary on my profile for later viewing and editing
+        I want to be able to share my made itinerary with other people or on social media so that people can give me ideas
+        I want to be able to collaborate with other users to create a itinerary that works
+    
+    User (contributor)
+        I want to be able to contribute to existing itineraries so that I can provide input to others
+    
+
+Gems
+    devise
+    simple_form
+    bootstrap
+    fontawesome
+    friendly_id
+    act-as-taggable-on
+    
+    cancancan
+    rolify
+    
+    gmaps4rails
+    geocoder
+    
+    act_as_votable
+    
+    carrierwave
+    cloudinary
+
+    ransack (search forms?)
+    searchkick (intelligent search?)
+
