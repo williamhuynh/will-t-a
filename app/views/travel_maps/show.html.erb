@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @travel_map.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @travel_map.description %>
+</p>
+
+<p>
+  <strong>Duration:</strong>
+  <%= @travel_map.duration %>
+</p>
+
+<p>
+  <strong>Cost:</strong>
+  <%= @travel_map.cost %>
+</p>
+
+<p>
+  <strong>Profile:</strong>
+  <%= @travel_map.profile %>
+</p>
+
+<%= link_to 'Edit', edit_travel_map_path(@travel_map) %> |
+<%= link_to 'Back', travel_maps_path %>

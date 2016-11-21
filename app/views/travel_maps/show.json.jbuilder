@@ -1,0 +1,1 @@
+json.partial! "travel_maps/travel_map", travel_map: @travel_map

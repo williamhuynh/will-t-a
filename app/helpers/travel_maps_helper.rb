@@ -1,0 +1,2 @@
+module TravelMapsHelper
+end

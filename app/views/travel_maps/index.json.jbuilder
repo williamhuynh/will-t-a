@@ -1,0 +1,1 @@
+json.array! @travel_maps, partial: 'travel_maps/travel_map', as: :travel_map

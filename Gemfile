@@ -28,6 +28,9 @@ gem 'bootstrap-sass'
 gem 'font-awesome-rails'
 gem 'country_select'
 
+gem 'geocoder'
+gem 'gmaps4rails'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

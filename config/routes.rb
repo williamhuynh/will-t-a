@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :locations
+  resources :travel_maps
   resources :profiles
   devise_for :users, controllers: { registrations: "registrations" }
   root 'home#index'

@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Travel Maps</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Duration</th>
+      <th>Cost</th>
+      <th>Profile</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @travel_maps.each do |travel_map| %>
+      <tr>
+        <td><%= travel_map.name %></td>
+        <td><%= travel_map.description %></td>
+        <td><%= travel_map.duration %></td>
+        <td><%= travel_map.cost %></td>
+        <td><%= travel_map.profile %></td>
+        <td><%= link_to 'Show', travel_map %></td>
+        <td><%= link_to 'Edit', edit_travel_map_path(travel_map) %></td>
+        <td><%= link_to 'Destroy', travel_map, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Travel map', new_travel_map_path %>

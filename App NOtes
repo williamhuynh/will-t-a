@@ -24,12 +24,17 @@ UserItinerary - has many Users, has many Itineraries
 
 Place - has many itineraries
     name
+    photo
     description
     duration
     reviews
     cost
     latitude
     longitude
+    
+Photos
+
+
     
 
 Actors
@@ -75,6 +80,8 @@ On the homepage....
 
 Search bar - where do you want to go?
 Results -> pictures of points of interest in that area
+
+
 
 
 
