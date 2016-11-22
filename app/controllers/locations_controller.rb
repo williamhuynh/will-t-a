@@ -15,6 +15,7 @@ class LocationsController < ApplicationController
   # GET /locations/new
   def new
     @location = Location.new
+    @travel_map = TravelMap.friendly.find(params[:travel_map])
   end
 
   # GET /locations/1/edit
@@ -24,11 +25,15 @@ class LocationsController < ApplicationController
   # POST /locations
   # POST /locations.json
   def create
-    @location = Location.new(location_params)
+    @location = Location.where(name: params[:location][:name]).first_or_create(location_params) #this finds whether there is an entry for the name already. Creates if not
+    # @location = Location.new(location_params)
+    @location.travel_maps << TravelMap.find(params[:travel_map])
+    # @travel_map = TravelMap.friendly.find(params[:travel_map])
+    # @location.travel_maps << @travel_map
 
     respond_to do |format|
       if @location.save
-        format.html { redirect_to @location, notice: 'Location was successfully created.' }
+        format.html { redirect_to travel_map_path(params[:travel_map]), notice: 'You have successfully added a location to your map.' }
         format.json { render :show, status: :created, location: @location }
       else
         format.html { render :new }
@@ -69,6 +74,6 @@ class LocationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def location_params
-      params.require(:location).permit(:name, :description, :latitude, :longitude)
+      params.require(:location).permit(:name, :description, :latitude, :longitude, :travel_map)
     end
 end

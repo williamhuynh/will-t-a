@@ -8,4 +8,7 @@ class Location < ActiveRecord::Base
     def location_name
        name 
     end
+
+    
 end
+

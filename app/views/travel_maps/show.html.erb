@@ -1,7 +1,41 @@
 <p id="notice"><%= notice %></p>
 
+<div style='width: 800px;'>
+  <div id="map" style='width: 800px; height: 400px;'></div>
+<script type="text/javascript">
+    customStyle = [{"featureType":"administrative","elementType":"labels.text","stylers":[{"visibility":"off"}]},{"featureType":"administrative.locality","elementType":"labels.text","stylers":[{"visibility":"off"}]},{"featureType":"administrative.neighborhood","elementType":"labels.text","stylers":[{"visibility":"off"}]},{"featureType":"landscape.man_made","elementType":"labels.text","stylers":[{"visibility":"off"}]},{"featureType":"landscape.natural","elementType":"geometry.fill","stylers":[{"visibility":"on"},{"color":"#e0efef"}]},{"featureType":"landscape.natural","elementType":"labels.text","stylers":[{"visibility":"off"}]},{"featureType":"poi","elementType":"geometry.fill","stylers":[{"visibility":"on"},{"hue":"#1900ff"},{"color":"#c0e8e8"}]},{"featureType":"poi","elementType":"labels.text","stylers":[{"visibility":"off"}]},{"featureType":"poi","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"geometry","stylers":[{"lightness":100},{"visibility":"simplified"}]},{"featureType":"road","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"labels.text","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit.line","elementType":"geometry","stylers":[{"visibility":"on"},{"lightness":700}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#7dcdcd"}]}];
+    handler = Gmaps.build('Google');
+    handler.buildMap({ 
+      provider: {
+        zoom: 1,
+        center: new google.maps.LatLng(0, 0),
+        streetViewControl: false,
+        mapTypeControl: false,
+        styles: customStyle
+      }, 
+    internal: {id: 'map'}}, 
+    function(){
+      // markers = handler.addMarkers([
+      //   {
+      //     "lat": 0,
+      //     "lng": 0,
+      //     "picture": {
+      //       "url": "http://people.mozilla.com/~faaborg/files/shiretoko/firefoxIcon/firefox-32.png",
+      //       "width":  32,
+      //       "height": 32
+      //     },
+      //     "infowindow": "hello!"
+      //   }
+      // ]);
+      // handler.bounds.extendWith(markers);
+      // handler.fitMapToBounds();
+    });
+</script>
+
+<%= link_to 'Add Location to Map', new_location_path(travel_map: @travel_map) %>
+
 <p>
-  <strong>Name:</strong>
+  <strong>Map Name:</strong>
   <%= @travel_map.name %>
 </p>
 
