@@ -10,6 +10,14 @@ class TravelMapsController < ApplicationController
   # GET /travel_maps/1
   # GET /travel_maps/1.json
   def show
+
+    @locations = @travel_map.locations
+
+    @hash = Gmaps4rails.build_markers(@locations) do |location, marker|
+      marker.lat location.latitude
+      marker.lng location.longitude
+    end
+
   end
 
   # GET /travel_maps/new

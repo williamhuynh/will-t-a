@@ -1,4 +1,4 @@
-source 'https://rubygems.org'
+source 'http://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -32,7 +32,8 @@ gem 'geocoder'
 gem 'gmaps4rails'
 
 gem 'friendly_id'
-
+gem 'tzinfo-data'
+gem 'cancan'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
