@@ -1,91 +1,79 @@
-<div style='width: 800px;'>
-  <div id="map" style='width: 800px; height: 400px;'></div>
-<script type="text/javascript">
-    customStyle = [{"featureType":"administrative","elementType":"labels.text","stylers":[{"visibility":"off"}]},{"featureType":"administrative.locality","elementType":"labels.text","stylers":[{"visibility":"off"}]},{"featureType":"administrative.neighborhood","elementType":"labels.text","stylers":[{"visibility":"off"}]},{"featureType":"landscape.man_made","elementType":"labels.text","stylers":[{"visibility":"off"}]},{"featureType":"landscape.natural","elementType":"geometry.fill","stylers":[{"visibility":"on"},{"color":"#e0efef"}]},{"featureType":"landscape.natural","elementType":"labels.text","stylers":[{"visibility":"off"}]},{"featureType":"poi","elementType":"geometry.fill","stylers":[{"visibility":"on"},{"hue":"#1900ff"},{"color":"#c0e8e8"}]},{"featureType":"poi","elementType":"labels.text","stylers":[{"visibility":"off"}]},{"featureType":"poi","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"geometry","stylers":[{"lightness":100},{"visibility":"simplified"}]},{"featureType":"road","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"labels.text","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit.line","elementType":"geometry","stylers":[{"visibility":"on"},{"lightness":700}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#7dcdcd"}]}];
-    handler = Gmaps.build('Google');
-    handler.buildMap({ 
-      provider: {
-        zoom: 1,
-        center: new google.maps.LatLng(0, 0),
-        streetViewControl: false,
-        mapTypeControl: false,
-        styles: customStyle
-      }, 
-    internal: {id: 'map'}}, 
-    function(){
-      // markers = handler.addMarkers([
-      //   {
-      //     "lat": 0,
-      //     "lng": 0,
-      //     "picture": {
-      //       "url": "http://people.mozilla.com/~faaborg/files/shiretoko/firefoxIcon/firefox-32.png",
-      //       "width":  32,
-      //       "height": 32
-      //     },
-      //     "infowindow": "hello!"
-      //   }
-      // ]);
-      // handler.bounds.extendWith(markers);
-      // handler.fitMapToBounds();
-    });
-</script>
-
-
-</div>
-
 <%= link_to "Edit Travel Maps", travel_maps_path %>
 
+<div class = "row">
+  <div class = "col-md-3">
+    <div class = "panel panel-default">
+      <div class = "panel panel-body">
+        
+        <%= fa_icon "user 5x" %>
+        
+        <p>
+          <%= @profile.first_name %>
+          <%= link_to 'Edit', edit_profile_path(@profile) %> |
+        </p>
+
+        <% if not current_user %>
+          <p>
+            <strong>Street:</strong>
+            <%= @profile.street %>
+          </p>
+          
+          <p>
+            <strong>Suburb:</strong>
+            <%= @profile.suburb %>
+          </p>
+          
+          <p>
+            <strong>Postcode:</strong>
+            <%= @profile.postcode %>
+          </p>
+          
+          <p>
+            <strong>State:</strong>
+            <%= @profile.state %>
+          </p>
+          
+          <p>
+            <strong>Country:</strong>
+            <%= @profile.country %>
+          </p>
+          
+          <p>
+            <strong>Phone:</strong>
+            <%= @profile.phone %>
+          </p>
+          
+        <% end %>
+      </div>
+    </div>
+  </div>
+  
+  
+  <div class = "col-md-9">
+    <div class = "panel panel-default">
+      <div class = "panel panel-body">
+        <h2>My adventures</h2>
+        <div class = "row">
+          
+          <%= @profile.travel_maps.each do |travel_map| %>
+    
+            <div class = "col-md-12">
+              <div class = "panel panel-default">
+                <div class = "panel panel-body">
+                  <p><%= travel_map.name %></p>
+                  <p>test</p>
+                </div>
+              </div>
+            </div>
+          
+          <% end %>
+            
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</div>
+
 <p id="notice"><%= notice %></p>
-
-<p>
-  <strong>First name:</strong>
-  <%= @profile.first_name %>
-</p>
-
-<p>
-  <strong>Last name:</strong>
-  <%= @profile.last_name %>
-</p>
-
-<p>
-  <strong>Street:</strong>
-  <%= @profile.street %>
-</p>
-
-<p>
-  <strong>Suburb:</strong>
-  <%= @profile.suburb %>
-</p>
-
-<p>
-  <strong>Postcode:</strong>
-  <%= @profile.postcode %>
-</p>
-
-<p>
-  <strong>State:</strong>
-  <%= @profile.state %>
-</p>
-
-<p>
-  <strong>Country:</strong>
-  <%= @profile.country %>
-</p>
-
-<p>
-  <strong>Phone:</strong>
-  <%= @profile.phone %>
-</p>
-
-<p>
-  <strong>Photo:</strong>
-  <%= @profile.photo %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @profile.user %>
-</p>
-
-<%= link_to 'Edit', edit_profile_path(@profile) %> |
-<%= link_to 'Back', profiles_path %>
