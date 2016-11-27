@@ -1,66 +1,123 @@
 <p id="notice"><%= notice %></p>
 
-<div style='width: 800px;'>
-  <div id="map" style='width: 800px; height: 400px;'></div>
-<script type="text/javascript">
-    customStyle = [{"featureType":"administrative","elementType":"labels.text","stylers":[{"visibility":"off"}]},{"featureType":"administrative.locality","elementType":"labels.text","stylers":[{"visibility":"off"}]},{"featureType":"administrative.neighborhood","elementType":"labels.text","stylers":[{"visibility":"off"}]},{"featureType":"landscape.man_made","elementType":"labels.text","stylers":[{"visibility":"off"}]},{"featureType":"landscape.natural","elementType":"geometry.fill","stylers":[{"visibility":"on"},{"color":"#e0efef"}]},{"featureType":"landscape.natural","elementType":"labels.text","stylers":[{"visibility":"off"}]},{"featureType":"poi","elementType":"geometry.fill","stylers":[{"visibility":"on"},{"hue":"#1900ff"},{"color":"#c0e8e8"}]},{"featureType":"poi","elementType":"labels.text","stylers":[{"visibility":"off"}]},{"featureType":"poi","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"geometry","stylers":[{"lightness":100},{"visibility":"simplified"}]},{"featureType":"road","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"labels.text","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit.line","elementType":"geometry","stylers":[{"visibility":"on"},{"lightness":700}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#7dcdcd"}]}];
-    handler = Gmaps.build('Google');
-    handler.buildMap({ 
-      provider: {
-        zoom: 1,
-        center: new google.maps.LatLng(0, 0),
-        streetViewControl: false,
-        mapTypeControl: false,
-        styles: customStyle
-      }, 
-    internal: {id: 'map'}}, 
-    function(){
-      markers = handler.addMarkers(
-        <%=raw @hash.to_json %>
-        // [
-        // {
-          // "lat": 48.8,
-          // "lng": 2.3,
-      //     "picture": {
-      //       "url": "http://people.mozilla.com/~faaborg/files/shiretoko/firefoxIcon/firefox-32.png",
-      //       "width":  32,
-      //       "height": 32
-      //     },
-      //     "infowindow": "hello!"
-        // }
-      // ]
-      );
-      handler.bounds.extendWith(markers);
-      handler.fitMapToBounds();
-    });
-</script>
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel panel-default">
 
-<%= link_to 'Add Location to Map', new_location_path(travel_map: @travel_map) %>
+      <div class="panel-heading">
+        <h1 class=" text-center">
+          <%= @travel_map.name %>
+        </h1>
+      </div>
+      <div class="panel-body">
+        <div class="col-md-7">
+<!--           <div style='width: 800px;'> -->
+            <div id="map" style='width: 100%; height: 400px;'>
+              <script type="text/javascript">
+                  customStyle = [{"featureType":"administrative","elementType":"labels.text","stylers":[{"visibility":"off"}]},{"featureType": "administrative","elementType": "geometry.fill", "stylers": [{ "visibility": "off" }]},{"featureType":"administrative.locality","elementType":"labels.text","stylers":[{"visibility":"off"}]},{"featureType":"administrative.neighborhood","elementType":"labels.text","stylers":[{"visibility":"off"}]},{"featureType":"landscape.man_made","elementType":"labels.text","stylers":[{"visibility":"off"}]},{"featureType":"landscape.natural","elementType":"geometry.fill","stylers":[{"visibility":"on"},{"color":"#e0efef"}]},{"featureType":"landscape.natural","elementType":"labels.text","stylers":[{"visibility":"off"}]},{"featureType":"poi","elementType":"geometry.fill","stylers":[{"visibility":"on"},{"hue":"#1900ff"},{"color":"#c0e8e8"}]},{"featureType":"poi","elementType":"labels.text","stylers":[{"visibility":"off"}]},{"featureType":"poi","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"geometry","stylers":[{"lightness":100},{"visibility":"simplified"}]},{"featureType":"road","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"labels.text","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit.line","elementType":"geometry","stylers":[{"visibility":"on"},{"lightness":700}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#7dcdcd"}]}];
+                  handler = Gmaps.build('Google');
+                  handler.buildMap({ 
+                    provider: {
+                      zoom: 1,
+                      center: new google.maps.LatLng(0, 0),
+                      streetViewControl: false,
+                      mapTypeControl: false,
+                      styles: customStyle
+                    }, 
+                  internal: {id: 'map'}}, 
+                  function(){
+                    markers = handler.addMarkers(
+                      <%=raw @hash.to_json %>
+                      // [
+                      // {
+                        // "lat": 48.8,
+                        // "lng": 2.3,
+                    //     "picture": {
+                    //       "url": "http://people.mozilla.com/~faaborg/files/shiretoko/firefoxIcon/firefox-32.png",
+                    //       "width":  32,
+                    //       "height": 32
+                    //     },
+                    //     "infowindow": "hello!"
+                      // }
+                    // ]
+                    );
 
-<p>
-  <strong>Map Name:</strong>
-  <%= @travel_map.name %>
-</p>
+                    <% if @hash.size > 1 %>
+                    handler.bounds.extendWith(markers);
+                    handler.fitMapToBounds();
+                    <% end %>
+                  });
+              </script>
+            <!-- </div> -->
+          </div>
 
-<p>
-  <strong>Description:</strong>
-  <%= @travel_map.description %>
-</p>
+          <br>
+          <%= link_to 'Add a new destination', new_location_path(travel_map: @travel_map), class: "btn btn-default" %>
+        </div>
 
-<p>
-  <strong>Duration:</strong>
-  <%= @travel_map.duration %>
-</p>
+        
+        <div class="col-md-5">
 
-<p>
-  <strong>Cost:</strong>
-  <%= @travel_map.cost %>
-</p>
+          <% if not current_user == @travel_map.profile.user %>
+            <div>
+            <%= fa_icon "user 3x" %>
+            <h3>
+              <%= @travel_map.profile.first_name %>
+            </h3>
+            </div>
+          <% end %>
 
-<p>
-  <strong>Profile:</strong>
-  <%= @travel_map.profile %>
-</p>
 
-<%= link_to 'Edit', edit_travel_map_path(@travel_map) %> |
-<%= link_to 'Back', travel_maps_path %>
+          <p>
+            <strong>Description:</strong>
+            <%= @travel_map.description %>
+          </p>
+
+          <p>
+            <strong>Duration:</strong>
+            <%= @travel_map.duration %>
+          </p>
+
+          <p>
+            <strong>Cost:</strong>
+            <%= @travel_map.cost %>
+          </p>
+      
+          <%= link_to 'Edit map details', edit_travel_map_path(@travel_map) %>
+        
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <h2 class="text-center">Locations</h2>
+</div>
+
+<div clas="row">
+
+          <% @locations.each do |location| %>
+            <div class = "col-md-2">
+              <div class = "panel panel-default">
+                <div class = "panel-body">
+
+                  <div class="row text-center">
+                    <%= fa_icon "picture-o 3x" %>
+                  </div>
+                  <div class="row text-center">
+                    <p><%= location.name %></p>
+                  </div>
+
+                  <div class="row text-center">
+                    <%= link_to 'Remove', {:controller => "travel_maps", :action => "remove", :location => location.id}, method: "post", class: "btn btn-warning"%>
+
+                  <!-- delete_location_from_map(location) -->
+                  </div>
+
+                  </div>
+                </div>
+              </div>
+          <% end %>
+</div>

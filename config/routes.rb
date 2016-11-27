@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   resources :locations
-  resources :travel_maps
+  resources :travel_maps do
+      member do
+      post :remove
+    end
+  end
   resources :profiles
   devise_for :users, controllers: { registrations: "registrations" }
   root 'home#index'
@@ -9,6 +13,7 @@ Rails.application.routes.draw do
       post :search
     end
   end
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

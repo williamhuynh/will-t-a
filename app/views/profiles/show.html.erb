@@ -1,16 +1,17 @@
-<%= link_to "Edit Travel Maps", travel_maps_path %>
-
 <div class = "row">
   <div class = "col-md-3">
     <div class = "panel panel-default">
-      <div class = "panel panel-body">
+      <div class = "panel-body">
         
+        <div class = "text-center">
         <%= fa_icon "user 5x" %>
-        
-        <p>
+        <h2>
           <%= @profile.first_name %>
-          <%= link_to 'Edit', edit_profile_path(@profile) %> |
+        </h2>
+        <p>
+          <%= link_to 'Edit Profile', edit_profile_path(@profile) %>
         </p>
+        </div>
 
         <% if not current_user %>
           <p>
@@ -51,26 +52,47 @@
   
   <div class = "col-md-9">
     <div class = "panel panel-default">
-      <div class = "panel panel-body">
-        <h2>My adventures</h2>
+
+      <div class = "panel-heading">
+        <h4>My Adventures</h4>  
+      </div>
+
+      <div class = "panel-body">
+
         <div class = "row">
           
-          <%= @profile.travel_maps.each do |travel_map| %>
-    
+          <% @profile.travel_maps.each do |travel_map| %>
             <div class = "col-md-12">
               <div class = "panel panel-default">
-                <div class = "panel panel-body">
-                  <p><%= travel_map.name %></p>
-                  <p>test</p>
+                <div class = "panel-body">
+
+                  <%= link_to travel_map_path(travel_map), style: "color: black;"  do %>
+                        <div class="row">
+                          <div class="col-md-2 text-center">
+                              <%= fa_icon "map-o 3x" %>
+                          </div>
+                          <div class="col-md-4">
+                            <p><%= travel_map.name %></p>
+                          </div>
+                          <div class="col-md-6">
+                            <p><%= travel_map.description %></p>
+                          </div>
+                        </div>
+                  <% end %>
+            
                 </div>
               </div>
             </div>
           
           <% end %>
-            
           
         </div>
       </div>
+
+      <div class="panel-footer">  
+      <%= link_to "Add a new adventure", travel_maps_path %>
+      </div>
+
     </div>
   </div>
   

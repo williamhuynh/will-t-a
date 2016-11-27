@@ -3,7 +3,7 @@
 
   <div class="form-inputs">
     <%= f.input :name %>
-    <%= f.input :description %>
+    <%= f.hidden_field :description %>
     <!--<= f.hidden_field :travel_map, value: @travel_map >-->
     <%= hidden_field_tag "travel_map", @travel_map.id %>
   

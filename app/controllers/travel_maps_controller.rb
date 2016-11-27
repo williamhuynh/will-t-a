@@ -1,5 +1,5 @@
 class TravelMapsController < ApplicationController
-  before_action :set_travel_map, only: [:show, :edit, :update, :destroy]
+  before_action :set_travel_map, only: [:show, :edit, :update, :destroy, :remove]
 
   # GET /travel_maps
   # GET /travel_maps.json
@@ -27,6 +27,16 @@ class TravelMapsController < ApplicationController
 
   # GET /travel_maps/1/edit
   def edit
+  end
+
+  def remove
+    @location = @travel_map.locations.find(params[:location])
+    @travel_map.locations.delete(@location)
+
+    respond_to do |format|
+      format.html { redirect_to @travel_map, notice: 'Location was succesfully removed.' }
+      format.json { render :show, status: :created, location: @travel_map } 
+    end
   end
 
   # POST /travel_maps
