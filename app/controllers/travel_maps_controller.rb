@@ -17,6 +17,31 @@ class TravelMapsController < ApplicationController
       marker.lat location.latitude
       marker.lng location.longitude
     end
+    
+    @shortest_travel_time = ""
+    
+    if @locations.count < 5
+      
+      @comb_locations = @locations.combination(2).to_a
+      
+      @comb_locations.each do |location|
+        
+        puts location
+        latlng_origin = location[0].latitude.to_s + "," + location[0].longitude.to_s
+        latlng_destination = location[1].latitude.to_s + "," + location[1].longitude.to_s
+        google_initialise = GoogleMap.new(latlng_origin, latlng_destination)
+        directions = google_initialise.directions
+        puts directions
+        body = JSON.parse(directions.body)
+        puts body
+        
+        if body["status"] == "ZERO_RESULTS"
+        else
+          distance = body["routes"][0]["legs"][0]["distance"]["value"]
+        end
+      end
+      
+    end
 
   end
 

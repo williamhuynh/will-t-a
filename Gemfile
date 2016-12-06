@@ -34,6 +34,9 @@ gem 'gmaps4rails'
 gem 'friendly_id'
 gem 'tzinfo-data'
 gem 'cancan'
+
+gem 'httparty'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

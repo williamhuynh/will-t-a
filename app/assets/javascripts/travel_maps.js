@@ -15,21 +15,23 @@ function initMap() {
 
 
   directionsService.route(request, function(response, status) {
+    one(response);
     if (status == google.maps.DirectionsStatus.OK) {
       directionsDisplay.setDirections(response);
       
-      console.log(response);
         } 
     else { window.alert('Directions request failed due to ' + status);
         }
-    
+
       console.log(response.routes[0].legs[0].duration.value);
-      test += parseFloat(response.routes[0].legs[0].duration.value);
-      console.log(test);
-      return test;
+
   });
 
-console.log(test);
 
 }
 
+function one(response) {
+  var test = response;
+}
+
+console.log(test);
